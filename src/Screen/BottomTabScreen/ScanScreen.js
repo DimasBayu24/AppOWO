@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
-import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -52,3 +58,5 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+AppRegistry.registerComponent('default', () => ScanScreen);

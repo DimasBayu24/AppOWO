@@ -16,6 +16,7 @@ export default class HistoryScreen extends Component {
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header}>
               <Icon
+                onPress={() => this.props.navigation.navigate('Home')}
                 name="arrow-left"
                 color="white"
                 size={22}

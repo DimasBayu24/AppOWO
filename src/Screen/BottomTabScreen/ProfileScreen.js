@@ -45,7 +45,16 @@ export default class ProfileScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={style.OwoId}>
-            <Text style={{fontSize: 20, padding: '2%'}}>OWO ID</Text>
+            <Text
+              style={{
+                fontSize: 18,
+                padding: '2%',
+                marginLeft: 20,
+                fontWeight: 'bold',
+                marginTop: 10,
+              }}>
+              OWO ID
+            </Text>
             <View style={style.boxQRBar}>
               <View style={style.boxCodeQR}>
                 <Icon name="qrcode" size={60} />
@@ -67,7 +76,7 @@ export default class ProfileScreen extends Component {
               onPress={this.handleEditProfile}
               style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="user-edit" size={25} color={'#53338C'} />
+                <Icon5 name="user-edit" size={25} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Ubah Profil
@@ -77,7 +86,7 @@ export default class ProfileScreen extends Component {
             </TouchableOpacity>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="credit-card" size={28} color={'#53338C'} />
+                <Icon5 name="credit-card" size={28} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   My Cards
@@ -87,7 +96,7 @@ export default class ProfileScreen extends Component {
             </View>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <IconM name="ticket-percent" size={30} color={'#53338C'} />
+                <IconM name="ticket-percent" size={30} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Kode Promo
@@ -100,7 +109,7 @@ export default class ProfileScreen extends Component {
             <Text style={style.textAkun}>Keamanan</Text>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="lock" size={25} color={'#53338C'} />
+                <Icon5 name="lock" size={25} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Ubah Security Code
@@ -113,7 +122,7 @@ export default class ProfileScreen extends Component {
             <Text style={style.textAkun}>Tentang</Text>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="medal" size={25} color={'#53338C'} />
+                <Icon5 name="medal" size={25} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Keuntungan Pakai OWO
@@ -123,7 +132,7 @@ export default class ProfileScreen extends Component {
             </View>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="lightbulb" size={30} color={'#53338C'} />
+                <Icon5 name="lightbulb" size={30} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Panduan OWO
@@ -133,7 +142,7 @@ export default class ProfileScreen extends Component {
             </View>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <Icon5 name="wpforms" size={30} color={'#53338C'} />
+                <Icon5 name="wpforms" size={30} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Syarat dan Ketentuan
@@ -143,7 +152,7 @@ export default class ProfileScreen extends Component {
             </View>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <IconM name="shield-plus" size={30} color={'#53338C'} />
+                <IconM name="shield-plus" size={30} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Kebijakan Privasi
@@ -153,7 +162,7 @@ export default class ProfileScreen extends Component {
             </View>
             <View style={style.accountEdit}>
               <View style={style.flexIconText}>
-                <IconA name="questioncircle" size={30} color={'#53338C'} />
+                <IconA name="questioncircle" size={30} color={'#4D2A86'} />
                 <Text
                   style={{marginLeft: '5%', fontSize: 15, fontWeight: 'bold'}}>
                   Pusat Bantuan
@@ -187,15 +196,17 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '9%',
+    height: '11%',
   },
   textHeader: {
     fontSize: 20,
     paddingLeft: '4%',
+    paddingTop: 15,
   },
   bell: {
-    color: '#53338C',
+    color: '#4D2A86',
     paddingRight: '4%',
+    paddingTop: 15,
   },
   userInfo: {
     flexDirection: 'row',
@@ -229,12 +240,11 @@ const style = StyleSheet.create({
   },
   OwoId: {
     marginTop: '5%',
-    width: '90%',
+    width: '100%',
     backgroundColor: 'white',
     elevation: 2,
     borderRadius: 10,
     height: 150,
-    marginHorizontal: '5%',
   },
   boxCodeQR: {
     flexDirection: 'row',
@@ -295,7 +305,7 @@ const style = StyleSheet.create({
   signOutContainer: {
     width: '85%',
     height: 50,
-    backgroundColor: '#53338C',
+    backgroundColor: '#4D2A86',
     marginHorizontal: '5%',
     marginVertical: '5%',
     alignItems: 'center',

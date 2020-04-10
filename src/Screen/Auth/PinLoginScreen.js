@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import {
   View,
   Image,
@@ -14,15 +16,53 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
+import {login} from '../../Redux/Actions/Auth';
+
 let screenWidth = Dimensions.get('window').width;
 let screenHeight = Dimensions.get('window').height;
-export default class PIN extends Component {
+
+const mapStateToProps = auth => {
+  return {
+    auth,
+  };
+};
+
+class PinLoginScreen extends Component {
   constructor() {
     super();
     this.state = {
-      inputValue: '',
+      pinNumber: '',
     };
   }
+
+  loginId = () => {
+    const {pinNumber} = this.state;
+    // const {navigation} = this.props;
+
+    const fullname = JSON.stringify(
+      this.props.navigation.getParam('fullname', ''),
+    );
+    const phoneNumber = JSON.stringify(
+      this.props.navigation.getParam('phoneNumber', ''),
+    );
+    const email = JSON.stringify(this.props.navigation.getParam('email', ''));
+    const user = {
+      // fullname: 'Dzaky Badawi',
+      // phoneNumber: '082276891192',
+      // email: 'aiden@gmail.com',
+      fullname,
+      phoneNumber,
+      email,
+      pinNumber,
+    };
+    this.props.dispatch(register(user));
+  };
+
+  buttonRegister = () => {
+    this.registerId();
+    this.props.navigation.navigate('Login');
+    // console.log(this.state.fullname);
+  };
 
   render() {
     return (
@@ -67,16 +107,26 @@ export default class PIN extends Component {
               secureTextEntry={true}
               codeInputFieldStyle={styles.underlineStyleBase}
               codeInputHighlightStyle={styles.underlineStyleHighLighted}
-              onCodeFilled={code => {
-                console.log(`Code is ${code}, you are good to go!`);
+              // onCodeChanged={pinNumber => {
+              //   this.setState(pinNumber);
+              // }}
+              onCodeFilled={pinNumber => {
+                // this.setState(pinNumber);
+                console.log('type', typeof pinNumber);
+                console.log(pinNumber);
+                console.log(`Code is ${pinNumber}, you are good to go!`);
+                this.setState({pinNumber});
               }}
+
               // placeholderCharacter={'*'}
               // placeholderTextColor={'red'}
               // selectionColor={"#03DAC6"}
             />
           </View>
           <View style={styles.containerButtonSubmit}>
-            <TouchableOpacity style={styles.buttonSubmit}>
+            <TouchableOpacity
+              onPress={this.buttonRegister}
+              style={styles.buttonSubmit}>
               <Text style={{textAlign: 'center', color: 'white'}}>Submit</Text>
             </TouchableOpacity>
           </View>
@@ -85,6 +135,8 @@ export default class PIN extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(PinLoginScreen);
 
 const styles = StyleSheet.create({
   container: {

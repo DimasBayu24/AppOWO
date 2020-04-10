@@ -1,114 +1,169 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator, HeaderBackButton} from 'react-navigation-stack';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator,
+} from 'react-navigation-tabs';
+import LoginScreen from './src/Screen/Auth/LoginScreen';
+import PinLoginScreen from './src/Screen/Auth/PinLoginScreen';
+import PinRegisterScreen from './src/Screen/Auth/PinRegisterScreen';
+import RegisterScreen from './src/Screen/Auth/RegisterScreen';
+import HomeScreen from './src/Screen/BottomTabScreen/HomeScreen';
+import DealsScreen from './src/Screen/BottomTabScreen/DealsScreen';
+import ProfileScreen from './src/Screen/BottomTabScreen/ProfileScreen';
+import FinanceScreen from './src/Screen/BottomTabScreen/FinanceScreen';
+import ScanScreen from './src/Screen/BottomTabScreen/ScanScreen';
+import EditProfileScreen from './src/Component/EditProfileScreen';
+import TopUpScreen from './src/Screen/TransactionScreen/TopupScreen';
+import TransferScreen from './src/Screen/TransactionScreen/TransferScreen';
+import HistoryScreen from './src/Screen/TransactionScreen/HistoryScreen';
+import FavoriteScreen from './src/Screen/TransactionScreen/FavoriteScreen';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {TouchableOpacity} from 'react-native';
+// import {useNavigation} from '@react-navigation/native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+// const navigation = useNavigation();
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Pin: PinRegisterScreen,
+    Register: RegisterScreen,
+    PinLogin: PinLoginScreen,
+  },
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+  },
+);
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+const TopTab = createMaterialTopTabNavigator(
+  {
+    'Penerima Baru': {screen: TransferScreen},
+    Favorit: {screen: FavoriteScreen},
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  {
+    tabBarPosition: 'top',
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarOptions: {
+      activeTintColor: '#FFFFFF',
+      inactiveTintColor: '#9A97A9',
+      style: {
+        backgroundColor: '#53338C',
+        paddingBottom: -100,
+      },
+      labelStyle: {
+        textAlign: 'center',
+      },
+      indicatorStyle: {
+        borderBottomColor: '#11AFB8',
+        borderBottomWidth: 3,
+      },
+    },
   },
-  body: {
-    backgroundColor: Colors.white,
+);
+const ProfileStack = createStackNavigator(
+  {
+    Profile: {screen: ProfileScreen},
+    EditProfile: {screen: EditProfileScreen},
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  {
+    initialRouteName: 'Profile',
+    headerMode: 'none',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+);
+const TransferStack = createStackNavigator({
+  TopTab: {
+    screen: TopTab,
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#53338C',
+        elevation: 0,
+      },
+      headerTintColor: 'white',
+      title: 'TRANSFER',
+      headerTitleAlign: 'left',
+
+      headerLeft: (
+        <TouchableOpacity
+          onPress={_ => navigation.navigate('Home')}
+          style={{paddingLeft: 25}}>
+          {/* <HeaderBackButton onPress={_ => navigation.navigate('Home')}> */}
+          <Icon name="arrow-left" size={25} color="white" />
+          {/* </HeaderBackButton> */}
+        </TouchableOpacity>
+      ),
+    }),
   },
 });
+const TransactionStack = createStackNavigator(
+  {
+    TopUp: {screen: TopUpScreen},
+    Transfer: {screen: TransferStack},
+    History: {screen: HistoryScreen},
+  },
+  {
+    headerMode: 'none',
+  },
+);
 
-export default App;
+const AppTabNavigator = createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Icon name="home" size={25} />,
+      },
+    },
+    Deals: {
+      screen: DealsScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Icon name="tags" size={25} />,
+      },
+    },
+    Scan: {
+      screen: ScanScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="qrcode" size={50} style={{marginBottom: 20}} />
+        ),
+      },
+    },
+    Finance: {
+      screen: FinanceScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Icon name="money" size={25} />,
+      },
+    },
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        tabBarIcon: ({tintColor, size}) => <Icon name="user" size={25} />,
+      },
+    },
+  },
+  {
+    tabBarOptions: {
+      inactiveTintColor: 'grey',
+      activeTintColor: '#4D2A86',
+      inactiveColor: 'grey',
+      activeColor: '#4D2A86',
+      labelStyle: {fontSize: 13, fontWeight: 'bold'},
+    },
+  },
+);
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Auth: AuthStack,
+      App: AppTabNavigator,
+      Transaction: TransactionStack,
+    },
+    {
+      initialRouteName: 'Auth',
+    },
+  ),
+);

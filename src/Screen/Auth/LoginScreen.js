@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {login} from '../../Redux/Actions/Auth';
+
 import {
   Text,
   View,
@@ -9,6 +12,7 @@ import {
   StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Logo from '../../../assets/Logo.png';
 
 export default class LoginScreen extends Component {
   HandleSignUp = () => {
@@ -20,7 +24,7 @@ export default class LoginScreen extends Component {
         <StatusBar
           barStyle="dark-content"
           hidden={false}
-          backgroundColor="#53338C"
+          backgroundColor="#4D2A86"
           translucent={true}
         />
         <View style={styles.imageLogoContainer}>
@@ -67,7 +71,10 @@ export default class LoginScreen extends Component {
             color={'#11AFB8'}
             style={styles.iconText}
           />
-          <Text style={styles.textFooter}>Butuh bantuan?</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Home')}>
+            <Text style={styles.textFooter}>Butuh bantuan?</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

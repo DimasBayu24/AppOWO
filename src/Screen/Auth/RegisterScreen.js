@@ -10,10 +10,33 @@ import {
   ScrollView,
 } from 'react-native';
 
-export default class RegisterScreen extends Component {
-  HandleSignUp = () => {
-    this.props.navigation.navigate('App');
+class RegisterScreen extends Component {
+  state = {
+    fullname: '',
+    phoneNumber: '',
+    email: '',
   };
+
+  // registerId = () => {
+  //   const {fullname, phoneNumber, email} = this.state;
+  //   const user = {
+  //     fullname,
+  //     phoneNumber,
+  //     email,
+  //   };
+  //   this.props.dispatch(register(user));
+  // };
+
+  buttonRegister = () => {
+    // this.registerId();
+    this.props.navigation.navigate('Pin', {
+      fullname: this.state.fullname,
+      phoneNumber: this.state.phoneNumber,
+      email: this.state.email,
+    });
+    // console.log(this.state.fullname);
+  };
+
   render() {
     return (
       <View>
@@ -32,11 +55,23 @@ export default class RegisterScreen extends Component {
             {'\nuntuk'} verifikasi proses registrasi{' '}
           </Text>
           <Text style={style.textForm}>Nama Lengkap</Text>
-          <TextInput style={style.inputForm} />
+          <TextInput
+            value={this.state.fullname}
+            onChangeText={fullname => this.setState({fullname})}
+            style={style.inputForm}
+          />
           <Text style={style.textForm}>Nomor Ponsel</Text>
-          <TextInput style={style.inputForm} />
+          <TextInput
+            value={this.state.phoneNumber}
+            onChangeText={phoneNumber => this.setState({phoneNumber})}
+            style={style.inputForm}
+          />
           <Text style={style.textForm}>Email</Text>
-          <TextInput style={style.inputForm} />
+          <TextInput
+            value={this.state.email}
+            onChangeText={email => this.setState({email})}
+            style={style.inputForm}
+          />
           <Text style={style.textForm}>
             {'Kode Promo/Referensi:(opsional)'}
           </Text>
@@ -54,7 +89,7 @@ export default class RegisterScreen extends Component {
           </View>
           <TouchableOpacity
             style={style.nextButton}
-            onPress={this.HandleSignUp}>
+            onPress={this.buttonRegister}>
             <Text style={{color: 'white'}}>BERIKUTNYA</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -63,12 +98,15 @@ export default class RegisterScreen extends Component {
   }
 }
 
+export default RegisterScreen;
+
 const style = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#53338C',
-    height: 60,
+    backgroundColor: '#4D2A86',
+    height: 75,
+    paddingTop: 20,
   },
   backButton: {
     color: 'white',
