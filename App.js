@@ -20,7 +20,7 @@ import TransferScreen from './src/Screen/TransactionScreen/TransferScreen';
 import HistoryScreen from './src/Screen/TransactionScreen/HistoryScreen';
 import FavoriteScreen from './src/Screen/TransactionScreen/FavoriteScreen';
 import DetailHistoryScreen from './src/Screen/TransactionScreen/DetailHistory';
-
+import TransferOWOScreen from './src/Screen/TransactionScreen/TransferOwo'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
@@ -107,6 +107,7 @@ const TransactionStack = createStackNavigator(
   {
     TopUp: {screen: TopUpScreen},
     Transfer: {screen: TransferStack},
+    TransferOwo: {screen: TransferOWOScreen},
     History: {screen: HistoryScreen},
     Detail: {screen: DetailHistoryScreen}
   },
