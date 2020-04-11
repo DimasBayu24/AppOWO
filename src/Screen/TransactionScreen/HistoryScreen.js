@@ -9,14 +9,18 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class HistoryScreen extends Component {
+  HandleDetail = () => {
+    this.props.navigation.push('Detail');
+  };
   render() {
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.header}>
+            <TouchableOpacity 
+            style={styles.header}>
               <Icon
-                onPress={() => this.props.navigation.navigate('Home')}
+              onPress={() => this.props.navigation.navigate('Home')}
                 name="arrow-left"
                 color="white"
                 size={22}
@@ -42,7 +46,9 @@ export default class HistoryScreen extends Component {
                 </Text>
               </View>
 
-              <TouchableOpacity style={styles.cardContainer}>
+              <TouchableOpacity 
+              onPress={this.HandleDetail}
+              style={styles.cardContainer}>
                 <View style={styles.textTitle}>
                   <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
                 </View>
@@ -54,7 +60,9 @@ export default class HistoryScreen extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.cardContainer2}>
+              <TouchableOpacity 
+              onPress={this.HandleDetail}
+              style={styles.cardContainer2}>
                 <View style={styles.textTitle}>
                   <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
                 </View>
@@ -66,7 +74,9 @@ export default class HistoryScreen extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.cardContainer3}>
+              <TouchableOpacity
+               onPress={this.HandleDetail}
+              style={styles.cardContainer3}>
                 <View style={styles.textTitle}>
                   <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
                 </View>
@@ -78,7 +88,9 @@ export default class HistoryScreen extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.cardContainer4}>
+              <TouchableOpacity 
+              onPress={this.HandleDetail}
+              style={styles.cardContainer4}>
                 <View style={styles.textTitle}>
                   <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
                 </View>
