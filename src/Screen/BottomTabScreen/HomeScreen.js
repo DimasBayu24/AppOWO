@@ -4,6 +4,9 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconF from 'react-native-vector-icons/Feather';
 import IconS from 'react-native-vector-icons/SimpleLineIcons';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import {connect} from 'react-redux';
+import {getBalance} from '../../Redux/Actions/Home';
+
 import {
   Text,
   View,
@@ -14,8 +17,39 @@ import {
   StatusBar,
   // ImageBackGround,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default class HomeScreen extends Component {
+const mapStateToProps = home => {
+  return {
+    home,
+  };
+};
+
+class HomeScreen extends Component {
+  state = {
+    userData: [],
+  };
+
+  balance = async () => {
+    await AsyncStorage.getItem('userID').then(
+      async userID => {
+        await console.log('id', userID); //Display key value
+        await this.props.dispatch(getBalance(userID));
+        await this.setState({
+          userData: this.props.home.home.homeData.result[0].balance,
+        });
+        await console.log('balance ', this.props.home.home.homeData.result[0]);
+      },
+      error => {
+        console.log(error); //Display error
+      },
+    );
+  };
+
+  componentDidMount = async () => {
+    await this.balance();
+  };
+
   render() {
     return (
       <View style={style.container}>
@@ -45,7 +79,7 @@ export default class HomeScreen extends Component {
               marginHorizontal: 10,
             }}>
             <Text>Rp</Text>
-            <Text style={{fontSize: 30}}>00000</Text>
+            <Text style={{fontSize: 30}}>{this.state.userData}</Text>
           </View>
           <Text style={{marginTop: '3%', marginHorizontal: 10}}>
             OVO Points <Text style={{color: 'orange'}}>483</Text>
@@ -320,6 +354,8 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const style = StyleSheet.create({
   container: {

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera as Camera} from 'react-native-camera';
 
 export default class ScanScreen extends Component {
   onSuccess = e => {
@@ -21,7 +22,7 @@ export default class ScanScreen extends Component {
     return (
       <QRCodeScanner
         onRead={this.onSuccess}
-        flashMode={QRCodeScanner.Constants.FlashMode.torch}
+        flashMode={Camera.Constants.FlashMode.torch}
         topContent={
           <Text style={styles.centerText}>
             Go to{' '}

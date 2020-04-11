@@ -34,7 +34,7 @@ class RegisterScreen extends Component {
       phoneNumber: this.state.phoneNumber,
       email: this.state.email,
     });
-    // console.log(this.state.fullname);
+    console.log(this.state.fullname);
   };
 
   render() {

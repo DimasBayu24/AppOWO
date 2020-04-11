@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {login} from '../../Redux/Actions/Auth';
+import {getPhone} from '../../Redux/Actions/Auth';
 
 import {
   Text,
@@ -14,10 +14,43 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Logo from '../../../assets/Logo.png';
 
-export default class LoginScreen extends Component {
+const mapStateToProps = auth => {
+  return {
+    auth,
+  };
+};
+
+class LoginScreen extends Component {
+  state = {
+    phoneNumber: '',
+  };
+
+  componentDidMount = async () => {
+    await this.handleCheckPhoneNumber();
+  };
+
   HandleSignUp = () => {
     this.props.navigation.push('Register');
   };
+
+  handleCheckPhoneNumber = async () => {
+    const {phoneNumber} = await this.state;
+    await this.props.dispatch(getPhone(phoneNumber));
+    await console.log('Phone Number ', this.props.auth.auth.authData);
+  };
+
+  handleLogin = () => {
+    this.handleCheckPhoneNumber()
+      .then(() => {
+        this.props.navigation.navigate('PinLogin', {
+          phoneNumber: this.state.phoneNumber,
+        });
+      })
+      .catch(error => {
+        alert('Phone number is not registered');
+      });
+  };
+
   render() {
     return (
       <View style={styles.loginContainer}>
@@ -44,10 +77,15 @@ export default class LoginScreen extends Component {
               placeholderTextColor="white"
               keyboardType="numeric"
               maxLength={14}
+              onChangeText={value => {
+                this.setState({phoneNumber: value});
+              }}
             />
           </View>
           <View style={styles.signInButtonContainer}>
-            <TouchableOpacity style={styles.signInButton}>
+            <TouchableOpacity
+              onPress={this.handleLogin}
+              style={styles.signInButton}>
               <Text style={styles.signInText}>SIGN IN</Text>
             </TouchableOpacity>
           </View>
@@ -80,6 +118,8 @@ export default class LoginScreen extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
   loginContainer: {

@@ -39,28 +39,19 @@ class PinLoginScreen extends Component {
     const {pinNumber} = this.state;
     // const {navigation} = this.props;
 
-    const fullname = JSON.stringify(
-      this.props.navigation.getParam('fullname', ''),
-    );
-    const phoneNumber = JSON.stringify(
-      this.props.navigation.getParam('phoneNumber', ''),
-    );
-    const email = JSON.stringify(this.props.navigation.getParam('email', ''));
+    const phoneNumber = this.props.navigation.getParam('phoneNumber', '');
+
     const user = {
-      // fullname: 'Dzaky Badawi',
-      // phoneNumber: '082276891192',
-      // email: 'aiden@gmail.com',
-      fullname,
       phoneNumber,
-      email,
       pinNumber,
     };
-    this.props.dispatch(register(user));
+    this.props.dispatch(login(user, this.props.navigation));
   };
 
-  buttonRegister = () => {
-    this.registerId();
-    this.props.navigation.navigate('Login');
+  buttonLogin = () => {
+    this.loginId();
+
+    // this.props.navigation.navigate('Login');
     // console.log(this.state.fullname);
   };
 
@@ -125,7 +116,7 @@ class PinLoginScreen extends Component {
           </View>
           <View style={styles.containerButtonSubmit}>
             <TouchableOpacity
-              onPress={this.buttonRegister}
+              onPress={this.buttonLogin}
               style={styles.buttonSubmit}>
               <Text style={{textAlign: 'center', color: 'white'}}>Submit</Text>
             </TouchableOpacity>

@@ -27,7 +27,7 @@ const authReducers = (state = initialValue, action) => {
         ...state,
         isPending: false,
         isFulfilled: true,
-        authData: state.authData,
+        authData: action.payload.data,
       };
     case 'LOGIN_PENDING':
       return {
@@ -48,7 +48,28 @@ const authReducers = (state = initialValue, action) => {
         ...state,
         isPending: false,
         isFulfilled: true,
-        authData: state.authData,
+        authData: action.payload.data,
+      };
+    case 'GET_NUMBER_PENDING':
+      return {
+        ...state,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case 'GET_NUMBER_REJECTED':
+      return {
+        ...state,
+        isPending: false,
+        isRejected: true,
+        errMsg: action.payload.data,
+      };
+    case 'GET_NUMBER_FULFILLED':
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        authData: action.payload.data,
       };
     default:
       return state;

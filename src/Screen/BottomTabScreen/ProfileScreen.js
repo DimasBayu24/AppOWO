@@ -5,14 +5,66 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
+  Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconA from 'react-native-vector-icons/AntDesign';
-import Icons from 'react-native-vector-icons/EvilIcons';
+import {connect} from 'react-redux';
+import {getProfile} from '../../Redux/Actions/Profile';
 
-export default class ProfileScreen extends Component {
+import AsyncStorage from '@react-native-community/async-storage';
+
+const mapStateToProps = profile => {
+  return {
+    profile,
+  };
+};
+
+class ProfileScreen extends Component {
+  state = {
+    profile: [],
+    modalVisible: false,
+  };
+
+  setModalVisible = visible => {
+    this.setState({modalVisible: visible});
+  };
+  handleCloseModal = () => {
+    this.setState({
+      modalVisible: false,
+    });
+  };
+
+  getProfileData = async () => {
+    await AsyncStorage.getItem('userID').then(
+      async userID => {
+        await console.log('id', userID); //Display key value
+        await this.props.dispatch(getProfile(userID));
+        await this.setState({
+          profile: this.props.profile.profile.profileData.result[0],
+        });
+        await console.log(
+          'profile ',
+          this.props.profile.profile.profileData.result[0],
+        );
+      },
+      error => {
+        console.log(error); //Display error
+      },
+    );
+  };
+
+  componentDidMount = async () => {
+    await this.getProfileData();
+  };
+
+  handleSignOut = () => {
+    AsyncStorage.removeItem('TOKEN');
+    this.props.navigation.navigate('Login');
+  };
   handleEditProfile = () => {
     this.props.navigation.navigate('EditProfile');
   };
@@ -27,10 +79,26 @@ export default class ProfileScreen extends Component {
           automaticallyAdjustContentInsets={true}
           style={{flex: 1, height: '100%'}}>
           <View style={style.userInfo}>
-            <Icons name="user" size={65} style={style.user} />
-            <View>
-              <Text style={{fontSize: 18}}>JOHN DOE</Text>
-              <Text style={{fontSize: 18}}>0812-xxxx-xxxx</Text>
+            <View
+              style={{
+                width: 66,
+                height: 66,
+                borderRadius: 33,
+              }}>
+              <Image
+                style={{
+                  width: 66,
+                  height: 66,
+                  borderRadius: 33,
+                }}
+                source={{uri: this.state.profile.profileImage}}
+              />
+            </View>
+            <View style={{paddingVertical: 10, paddingHorizontal: 15}}>
+              <Text style={{fontSize: 18}}>{this.state.profile.fullname}</Text>
+              <Text style={{fontSize: 18}}>
+                {this.state.profile.phoneNumber}
+              </Text>
             </View>
           </View>
           <View style={style.detailOWOPremier}>
@@ -56,12 +124,16 @@ export default class ProfileScreen extends Component {
               OWO ID
             </Text>
             <View style={style.boxQRBar}>
-              <View style={style.boxCodeQR}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setModalVisible(true);
+                }}
+                style={style.boxCodeQR}>
                 <Icon name="qrcode" size={60} />
                 <Text style={{marginLeft: 5, fontSize: 20, fontWeight: 'bold'}}>
                   QR Code
                 </Text>
-              </View>
+              </TouchableOpacity>
               <View style={style.boxCodeBar}>
                 <Icon name="barcode" size={60} />
                 <Text style={{marginLeft: 5, fontSize: 20, fontWeight: 'bold'}}>
@@ -177,18 +249,46 @@ export default class ProfileScreen extends Component {
             </Text>
             <Text style={style.pakeOWOaja}>#pakeOWOaja</Text>
           </View>
-          <TouchableOpacity style={style.signOutContainer}>
+          <TouchableOpacity
+            onPress={this.handleSignOut}
+            style={style.signOutContainer}>
             <Text style={style.signOut}>Sign Out</Text>
           </TouchableOpacity>
         </ScrollView>
+        <Modal
+          visible={this.state.modalVisible}
+          animationType="slide"
+          transparent={true}>
+          <View
+            style={{
+              alignSelf: 'center',
+              backgroundColor: 'white',
+              justifyContent: 'space-around',
+              marginTop: '40%',
+              elevation: 3,
+              width: '80%',
+              height: '50%',
+            }}>
+            <Image
+              style={{width: '80%', height: '50%', alignSelf: 'center'}}
+              source={{uri: this.state.profile.qrImage}}
+            />
+            <TouchableOpacity onPress={this.handleCloseModal}>
+              <Text style={{alignSelf: 'center'}}>close</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
     );
   }
 }
 
+export default connect(mapStateToProps)(ProfileScreen);
+
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   header: {
     backgroundColor: 'white',
@@ -212,9 +312,9 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     borderBottomWidth: 0.2,
-    paddingBottom: 10,
+    paddingVertical: 10,
     marginTop: 20,
-    marginHorizontal: '5%',
+    paddingLeft: '5%',
   },
   user: {},
   detailOWOPremier: {

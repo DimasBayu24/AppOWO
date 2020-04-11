@@ -39,13 +39,11 @@ class PinRegisterScreen extends Component {
     const {pinNumber} = this.state;
     // const {navigation} = this.props;
 
-    const fullname = JSON.stringify(
-      this.props.navigation.getParam('fullname', ''),
-    );
-    const phoneNumber = JSON.stringify(
-      this.props.navigation.getParam('phoneNumber', ''),
-    );
-    const email = JSON.stringify(this.props.navigation.getParam('email', ''));
+    const fullname = this.props.navigation.getParam('fullname', '');
+
+    const phoneNumber = this.props.navigation.getParam('phoneNumber', '');
+
+    const email = this.props.navigation.getParam('email', '');
     const user = {
       // fullname: 'Dzaky Badawi',
       // phoneNumber: '082276891192',
