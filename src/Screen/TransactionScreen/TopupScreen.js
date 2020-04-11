@@ -1,14 +1,25 @@
 import React, {Component} from "react"
 import { View, Image, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar, ScrollView } from "react-native"
 import Logo from '../../../assets/logo-box.png'
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class TopUpScreen extends Component {
     render(){
         return(
             
             <View style={styles.container}>
-                <ScrollView style={{height:'100%'}}>
+                <ScrollView style={styles.ScrollView}>
+                    <View style={styles.containerTopNavbar}>
+                        <View style={styles.topNavbar}>
+                        <Icon 
+                            onPress={() => this.props.navigation.navigate('Home')}
+                            name="arrow-left"
+                            color="white"
+                            size={25}
+                        />
+                        <Text style={styles.textTopNavbar}>Top Up</Text>
+                        </View>
+                    </View>
                 <View style={styles.boxUpper}>
                     <View style={styles.containerTextTitle}>
                         <Text style={styles.textTitle}>
@@ -92,13 +103,31 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%'
     },
+    ScrollView: {
+        height:'100%'
+    },
+    containerTopNavbar: {
+        backgroundColor: '#53338C', 
+        paddingBottom: '12%'
+    },
+    topNavbar: {
+        flexDirection: 'row', 
+        marginLeft: '7%', 
+        top: '6%'
+    },
+    textTopNavbar: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: 'white', 
+        marginLeft: '5%'
+    },
     boxUpper: {
         backgroundColor: 'white',
         width: '100%',
         height: '29%',
     },
     containerTextTitle: {
-        marginTop: '5%'
+        marginTop: '10%'
        
         
     },
@@ -194,7 +223,7 @@ const styles = StyleSheet.create({
         elevation: 30,
         width: '100%',
         height: '30%',
-        marginTop: '30%',
+        marginTop: '23%',
         top: '-10%',
         justifyContent: 'center'
     },

@@ -86,10 +86,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
     height: '55%',
-    // backgroundColor: 'cyan',
   },
   textContainer: {
-    // backgroundColor: 'magenta',
     paddingBottom: 25,
   },
   cardTop: {
@@ -106,13 +104,11 @@ const styles = StyleSheet.create({
   logoLeft: {
     width: '13%',
     height: 30,
-    // backgroundColor:'red',
     textAlign: 'right',
   },
   logoRight: {
     width: '13%',
     height: 30,
-    // backgroundColor:'red',
     textAlign: 'center',
     fontWeight: 'bold',
   },
@@ -121,7 +117,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   historyContainer: {
-    // backgroundColor: 'violet',
     paddingBottom: 10,
     borderBottomWidth: 0.5,
     borderColor: '#9A97A9',
@@ -132,7 +127,6 @@ const styles = StyleSheet.create({
   Photo: {
     width: '18%',
     height: 45,
-    // backgroundColor: 'red',
     textAlign: 'right',
   },
   cardNameHistory: {

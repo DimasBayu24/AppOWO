@@ -20,7 +20,7 @@ import TransferScreen from './src/Screen/TransactionScreen/TransferScreen';
 import HistoryScreen from './src/Screen/TransactionScreen/HistoryScreen';
 import FavoriteScreen from './src/Screen/TransactionScreen/FavoriteScreen';
 import DetailHistoryScreen from './src/Screen/TransactionScreen/DetailHistory';
-import MetodeScreen from './src/Screen/TransactionScreen/MetodeBank'
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
@@ -67,34 +67,6 @@ const TopTab = createMaterialTopTabNavigator(
   },
 );
 
-const TabBat = createMaterialTopTabNavigator(
-  {
-    "Instant Top Up": { screen: TopUpScreen },
-    'Metode Lain': { screen: MetodeScreen },
-  },
-  {
-    tabBarPosition: 'top',
-    swipeEnabled: true,
-    animationEnabled: true,
-    tabBarOptions: {
-      activeTintColor: '#FFFFFF',
-      inactiveTintColor: '#9A97A9',
-      style: {
-        backgroundColor: '#53338C',
-        paddingBottom: -100,       
-      },
-      labelStyle: {
-        textAlign: 'center',
-      },
-      indicatorStyle: {
-        borderBottomColor: '#11AFB8',
-        borderBottomWidth: 3,
-      },
-    },
-  }
-);
-
-
 const ProfileStack = createStackNavigator(
   {
     Profile: {screen: ProfileScreen},
@@ -130,38 +102,11 @@ const TransferStack = createStackNavigator({
   },
 });
 
-const TopUpStack = createStackNavigator({
-  TabBat: {
-      screen: TabBat,
-    navigationOptions: ({navigation}) => ({
-      headerStyle: {
-        backgroundColor: '#53338C',
-        elevation: 0,
-      },
-      headerTintColor: 'white',
-      title: 'TOP UP',
-      headerTitleAlign: 'left',
-
-      headerLeft: (
-        <TouchableOpacity
-          onPress={_ => navigation.navigate('Home')}
-          style={{paddingLeft: 25}}>
-          {/* <HeaderBackButton onPress={_ => navigation.navigate('Home')}> */}
-          <Icon name="arrow-left" size={25} color="white" />
-          {/* </HeaderBackButton> */}
-        </TouchableOpacity>
-      ),
-    }),
-  },
-});
-
-
 
 const TransactionStack = createStackNavigator(
   {
     TopUp: {screen: TopUpScreen},
     Transfer: {screen: TransferStack},
-    TopUpHeader: {screen: TopUpStack},
     History: {screen: HistoryScreen},
     Detail: {screen: DetailHistoryScreen}
   },
