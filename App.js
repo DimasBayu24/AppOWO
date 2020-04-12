@@ -22,6 +22,7 @@ import TransferWithQR from './src/Component/TransferWithQR';
 import HistoryScreen from './src/Screen/TransactionScreen/HistoryScreen';
 import FavoriteScreen from './src/Screen/TransactionScreen/FavoriteScreen';
 import DetailHistoryScreen from './src/Screen/TransactionScreen/DetailHistoryScreen';
+import SplashScreen from './src/Screen/SplashScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, View} from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
@@ -174,13 +175,14 @@ const AppTabNavigator = createBottomTabNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
+      Splash: SplashScreen,
       Auth: AuthStack,
       App: AppTabNavigator,
       Transaction: TransactionStack,
       EditProfile: EditProfileScreen,
     },
     {
-      initialRouteName: 'Auth',
+      initialRouteName: 'Splash',
     },
   ),
 );

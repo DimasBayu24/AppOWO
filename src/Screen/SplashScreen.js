@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {ImageBackground, StyleSheet, ActivityIndicator} from 'react-native';
 
-export default class LoadingScreen extends Component {
+export default class SplashScreen extends Component {
   componentDidMount() {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Login');
   }
   render() {
     return (
