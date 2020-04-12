@@ -305,7 +305,7 @@ export default class dealScreen extends Component {
                             </View>
                             <View style={styles.containerTextFooter}>
                                 <Text style={styles.textFooter}>Fashion</Text>
-                                <Text style={styles.textFooter}>health</Text>
+                                <Text style={styles.textFooterE}>health</Text>
                                 <Text style={styles.textFooterE}>Entertainment</Text>
                                 <Text style={styles.textFooter}>Automotive</Text>
                             </View>
