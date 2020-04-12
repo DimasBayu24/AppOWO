@@ -22,7 +22,7 @@ export default class ScanScreen extends Component {
     return (
       <QRCodeScanner
         onRead={this.onSuccess}
-        flashMode={Camera.Constants.FlashMode.torch}
+        // flashMode={Camera.Constants.FlashMode.torch}
         topContent={
           <Text style={styles.centerText}>
             Go to{' '}

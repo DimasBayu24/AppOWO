@@ -20,14 +20,16 @@ export default class TransferScreen extends Component {
         />
         <View style={styles.cardContainer}>
           <View>
-            <TouchableOpacity style={styles.cardTop}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Trans')}
+              style={styles.cardTop}>
               <Icon
                 name="paper-plane"
                 color="#11AFB8"
                 size={30}
                 style={styles.logoLeft}
               />
-              <Text>Ke Sesama OVO</Text>
+              <Text>Ke Sesama OWO </Text>
               <Icon
                 name="angle-right"
                 size={30}

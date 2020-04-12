@@ -11,8 +11,48 @@ import {
 } from 'react-native';
 import Logo from '../../../assets/logo-box.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default class TopUpScreen extends Component {
+import {connect} from 'react-redux';
+import {patchTopUp} from '../../Redux/Actions/TopUp';
+
+const mapStateToProps = topUp => {
+  return {
+    topUp,
+  };
+};
+
+class TopUpScreen extends Component {
+  state = {
+    balance: 0,
+  };
+
+  addTopUp = async () => {
+    await AsyncStorage.getItem('userID').then(
+      async userID => {
+        const {balance} = this.state;
+        const balanceData = {
+          balance: balance,
+        };
+        // await console.log('id', userID); //Display key value
+        await this.props.dispatch(patchTopUp(userID, balanceData));
+      },
+      error => {
+        console.log(error); //Display error
+      },
+    );
+  };
+
+  topUpHandler = () => {
+    this.addTopUp()
+      .then(() => {
+        this.props.navigation.navigate('Home');
+      })
+      .catch(error => {
+        alert('Minimum Transaction is Rp 10.000');
+      });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -37,7 +77,9 @@ export default class TopUpScreen extends Component {
                 <Image source={Logo} style={styles.iconOwo} />
                 <View style={styles.textCash}>
                   <Text>OVO Cash</Text>
-                  <Text>Saldo Rp21.300</Text>
+                  <Text>
+                    Saldo Rp {this.props.navigation.getParam('saldo', '')}
+                  </Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -48,13 +90,19 @@ export default class TopUpScreen extends Component {
               <Text style={styles.textTitle}>Pilih Nominal Top Up</Text>
             </View>
             <View style={styles.containerButtonBalance}>
-              <TouchableOpacity style={styles.buttonBalance1}>
+              <TouchableOpacity
+                onPress={() => this.setState({balance: 100000})}
+                style={styles.buttonBalance1}>
                 <Text style={styles.textBalance}>Rp100.000</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonBalance2}>
+              <TouchableOpacity
+                onPress={() => this.setState({balance: 200000})}
+                style={styles.buttonBalance2}>
                 <Text style={styles.textBalance}>Rp200.000</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonBalance3}>
+              <TouchableOpacity
+                onPress={() => this.setState({balance: 500000})}
+                style={styles.buttonBalance3}>
                 <Text style={styles.textBalance}>Rp500.000</Text>
               </TouchableOpacity>
             </View>
@@ -65,15 +113,21 @@ export default class TopUpScreen extends Component {
 
               <View style={styles.containerTextInputBox}>
                 <TextInput
-                  placeholder="Minimal Rp10.000"
+                  value={this.state.balance}
+                  placeholder="minimal Rp 10.000"
                   placeholderTextColor="#9A97A9"
                   keyboardType="numeric"
                   style={styles.textInputBox}
+                  onChangeText={value => {
+                    this.setState({balance: value});
+                  }}
                 />
               </View>
             </View>
             <View style={styles.containerButtonSubmit}>
-              <TouchableOpacity style={styles.buttonSubmit}>
+              <TouchableOpacity
+                onPress={this.topUpHandler}
+                style={styles.buttonSubmit}>
                 <Text style={styles.textSubmit}>Top Up sekarang</Text>
               </TouchableOpacity>
             </View>
@@ -83,6 +137,8 @@ export default class TopUpScreen extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(TopUpScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -213,7 +269,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonSubmit: {
-    top: '10%',
+    // top: '10%',
     marginHorizontal: '5%',
     borderRadius: 20,
     top: '-20%',

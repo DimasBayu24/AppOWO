@@ -15,7 +15,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  // ImageBackGround,
+  ImageBackground,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -38,7 +38,7 @@ class HomeScreen extends Component {
         await this.setState({
           userData: this.props.home.home.homeData.result[0].balance,
         });
-        await console.log('balance ', this.props.home.home.homeData.result[0]);
+        // await console.log('balance ', this.props.home.home.homeData.result[0]);
       },
       error => {
         console.log(error); //Display error
@@ -66,290 +66,314 @@ class HomeScreen extends Component {
           />
           <Icon name="bell" size={25} style={style.bell} />
         </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={style.scrollStyle}>
-          {/* <ImageBackGround
+        <ImageBackground
+          style={{flex: 1}}
+          source={require('../../../assets/backgroundHome.png')}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={style.scrollStyle}>
+            {/* <ImageBackGround
             source={require('../../../assets/backgroundHome.png')}> */}
-          <Text style={{marginTop: '3%', marginHorizontal: 10}}>OWO Cash</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: '3%',
-              marginHorizontal: 10,
-            }}>
-            <Text>Rp</Text>
-            <Text style={{fontSize: 30}}>{this.state.userData}</Text>
-          </View>
-          <Text style={{marginTop: '3%', marginHorizontal: 10}}>
-            OVO Points <Text style={{color: 'orange'}}>483</Text>
-          </Text>
-          <View
-            style={{
-              width: '88%',
-              backgroundColor: 'white',
-              height: 90,
-              alignSelf: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-              marginTop: '5%',
-              elevation: 2,
-            }}>
+            <Text
+              style={{marginTop: '3%', marginHorizontal: 10, color: 'white'}}>
+              OWO Cash
+            </Text>
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                marginTop: '3%',
+                marginHorizontal: 10,
+                color: 'white',
               }}>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('TopUp')}
-                style={{marginLeft: '10%', alignItems: 'center'}}>
-                <Icon name="refresh" size={30} color={'#4D2A86'} />
-                <Text>Top Up</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Transfer')}
-                style={{alignItems: 'center'}}>
-                <IconM name="bank-transfer" size={40} color={'#4D2A86'} />
-                <Text>Transfer</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('History')}
-                style={{marginRight: '10%', alignItems: 'center'}}>
-                <Icon name="history" size={30} color={'#4D2A86'} />
-                <Text>History</Text>
-              </TouchableOpacity>
+              <Text style={{color: 'white'}}>Rp</Text>
+              <Text style={{fontSize: 30, color: 'white'}}>
+                {this.state.userData}
+              </Text>
             </View>
-          </View>
-          {/* </ImageBackGround> */}
-          <View
-            style={{
-              flex: 1,
-              width: '100%',
-              height: 260,
-              backgroundColor: 'white',
-              alignSelf: 'center',
-              marginTop: '5%',
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-              elevation: 2,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}>
+            <Text
+              style={{marginTop: '3%', marginHorizontal: 10, color: 'white'}}>
+              OVO Points <Text style={{color: 'orange'}}>483</Text>
+            </Text>
             <View
               style={{
-                width: '25%',
-                height: '50%',
+                width: '88%',
+                backgroundColor: 'white',
+                height: 90,
+                alignSelf: 'center',
                 justifyContent: 'center',
-                alignItems: 'center',
+                borderRadius: 10,
+                marginTop: '5%',
+                elevation: 2,
               }}>
-              <IconF name="cloud-lightning" size={30} color={'orange'} />
-              <Text>PLN</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('TopUp', {
+                      saldo: this.state.userData,
+                    })
+                  }
+                  style={{marginLeft: '10%', alignItems: 'center'}}>
+                  <Icon name="refresh" size={30} color={'#4D2A86'} />
+                  <Text>Top Up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Transfer')}
+                  style={{alignItems: 'center'}}>
+                  <IconM name="bank-transfer" size={40} color={'#4D2A86'} />
+                  <Text>Transfer</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('History')}
+                  style={{marginRight: '10%', alignItems: 'center'}}>
+                  <Icon name="history" size={30} color={'#4D2A86'} />
+                  <Text>History</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            {/* </ImageBackGround> */}
             <View
               style={{
-                width: '25%',
-                height: '50%',
+                flex: 1,
+                width: '100%',
+                height: 260,
+                backgroundColor: 'white',
+                alignSelf: 'center',
+                marginTop: '5%',
+                borderRadius: 5,
+                alignItems: 'center',
                 justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <IconS name="screen-smartphone" size={30} />
-              <Text>Pulsa</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <IconS name="globe" size={30} color={'blue'} />
-              <Text>Paket Data</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <IconF name="smartphone" size={30} />
-              <Text>Pasca Bayar</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <IconM name="shield-plus" size={30} color={'green'} />
-              <Text>BPJS</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon5 name="tv" size={30} />
-              <Text>TV Kabel</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon name="tv" size={30} />
-              <Text>Streaming</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <IconM name="clover" size={30} color={'purple'} />
-              <Text>Lainnya</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              backgroundColor: 'white',
-            }}>
-            <View
-              style={{
+                elevation: 2,
                 flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: 10,
+                flexWrap: 'wrap',
+              }}>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconF name="cloud-lightning" size={30} color={'orange'} />
+                <Text>PLN</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconS name="screen-smartphone" size={30} />
+                <Text>Pulsa</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconS name="globe" size={30} color={'blue'} />
+                <Text>Paket Data</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconF name="smartphone" size={30} />
+                <Text>Pasca Bayar</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconM name="shield-plus" size={30} color={'green'} />
+                <Text>BPJS</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Icon5 name="tv" size={30} />
+                <Text>TV Kabel</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Icon name="tv" size={30} />
+                <Text>Streaming</Text>
+              </View>
+              <View
+                style={{
+                  width: '25%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <IconM name="clover" size={30} color={'purple'} />
+                <Text>Lainnya</Text>
+              </View>
+            </View>
+            <View
+              style={{
+                backgroundColor: 'white',
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: 10,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    marginHorizontal: 10,
+                  }}>
+                  Info dan Promo Spesial
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    color: '#11AFB8',
+                    marginHorizontal: 10,
+                  }}>
+                  Lihat Semua
+                </Text>
+              </View>
+              <ScrollView
+                style={{width: '100%', marginTop: '4%'}}
+                horizontal={true}>
+                <Image
+                  style={{
+                    width: 330,
+                    height: 130,
+                    borderRadius: 15,
+                    marginLeft: 10,
+                  }}
+                  resizeMode="stretch"
+                  source={require('../../../assets/slider1.png')}
+                />
+
+                <Image
+                  style={{
+                    width: 330,
+                    height: 130,
+                    borderRadius: 15,
+                    marginLeft: 10,
+                  }}
+                  resizeMode="stretch"
+                  source={require('../../../assets/slider2.png')}
+                />
+
+                <Image
+                  style={{
+                    width: 330,
+                    height: 130,
+                    borderRadius: 15,
+                    marginLeft: 10,
+                  }}
+                  resizeMode="stretch"
+                  source={require('../../../assets/slider3.png')}
+                />
+
+                <Image
+                  style={{
+                    width: 330,
+                    height: 130,
+                    borderRadius: 15,
+                    marginLeft: 10,
+                  }}
+                  resizeMode="stretch"
+                  source={require('../../../assets/slider4.png')}
+                />
+              </ScrollView>
+            </View>
+            <View
+              style={{
+                width: '100%',
+                height: 300,
+                backgroundColor: 'white',
+                marginTop: '5%',
+                elevation: 1,
               }}>
               <Text
                 style={{
                   fontSize: 18,
                   fontWeight: 'bold',
+                  marginTop: '5%',
                   marginHorizontal: 10,
                 }}>
-                Info dan Promo Spesial
+                Yang Menarik di OWO
               </Text>
               <Text
-                style={{fontSize: 15, color: '#11AFB8', marginHorizontal: 10}}>
-                Lihat Semua
+                style={{opacity: 0.5, marginTop: '2%', marginHorizontal: 10}}>
+                Jangan ngaku update kalau belum cobain fitur ini
               </Text>
-            </View>
-            <ScrollView
-              style={{width: '100%', marginTop: '4%'}}
-              horizontal={true}>
-              <Image
-                style={{
-                  width: 330,
-                  height: 130,
-                  borderRadius: 15,
-                  marginLeft: 10,
-                }}
-                resizeMode="stretch"
-                source={require('../../../assets/slider1.png')}
-              />
-
-              <Image
-                style={{
-                  width: 330,
-                  height: 130,
-                  borderRadius: 15,
-                  marginLeft: 10,
-                }}
-                resizeMode="stretch"
-                source={require('../../../assets/slider2.png')}
-              />
-
-              <Image
-                style={{
-                  width: 330,
-                  height: 130,
-                  borderRadius: 15,
-                  marginLeft: 10,
-                }}
-                resizeMode="stretch"
-                source={require('../../../assets/slider3.png')}
-              />
-
-              <Image
-                style={{
-                  width: 330,
-                  height: 130,
-                  borderRadius: 15,
-                  marginLeft: 10,
-                }}
-                resizeMode="stretch"
-                source={require('../../../assets/slider4.png')}
-              />
-            </ScrollView>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 300,
-              backgroundColor: 'white',
-              marginTop: '5%',
-              elevation: 1,
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                marginTop: '5%',
-                marginHorizontal: 10,
-              }}>
-              Yang Menarik di OWO
-            </Text>
-            <Text style={{opacity: 0.5, marginTop: '2%', marginHorizontal: 10}}>
-              Jangan ngaku update kalau belum cobain fitur ini
-            </Text>
-            <View
-              style={{
-                width: 150,
-                height: 225,
-                backgroundColor: 'white',
-                borderRadius: 10,
-                marginLeft: 10,
-                elevation: 2,
-                marginTop: '5%',
-              }}>
-              <Image
+              <View
                 style={{
                   width: 150,
-                  height: 100,
-                  borderTopLeftRadius: 10,
-                  borderTopLeftRadius: 10,
-                }}
-                resizeMode="stretch"
-                source={require('../../../assets/article1.png')}
-              />
-              <Text style={{fontWeight: 'bold', marginLeft: 5}}>
-                Pusat Bantuan
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  opacity: 0.5,
-                  marginTop: 10,
-                  marginLeft: 5,
+                  height: 225,
+                  backgroundColor: 'white',
+                  borderRadius: 10,
+                  marginLeft: 10,
+                  elevation: 2,
+                  marginTop: '5%',
                 }}>
-                {
-                  'Punya kendala atau \npertanyaan terkait OWO?\nKamu bisa kirim di sini'
-                }
-              </Text>
-              <Text
-                style={{color: '#8FD6D7', alignSelf: 'center', marginTop: 15}}>
-                Lihat Bantuan
-              </Text>
+                <Image
+                  style={{
+                    width: 150,
+                    height: 100,
+                    borderTopLeftRadius: 10,
+                    borderTopLeftRadius: 10,
+                  }}
+                  resizeMode="stretch"
+                  source={require('../../../assets/article1.png')}
+                />
+                <Text style={{fontWeight: 'bold', marginLeft: 5}}>
+                  Pusat Bantuan
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    opacity: 0.5,
+                    marginTop: 10,
+                    marginLeft: 5,
+                  }}>
+                  {
+                    'Punya kendala atau \npertanyaan terkait OWO?\nKamu bisa kirim di sini'
+                  }
+                </Text>
+                <Text
+                  style={{
+                    color: '#8FD6D7',
+                    alignSelf: 'center',
+                    marginTop: 15,
+                  }}>
+                  Lihat Bantuan
+                </Text>
+              </View>
             </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }

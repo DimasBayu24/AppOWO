@@ -7,157 +7,120 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
+import {getHistory} from '../../Redux/Actions/History';
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default class HistoryScreen extends Component {
+const mapStateToProps = history => {
+  return {
+    history,
+  };
+};
+
+class HistoryScreen extends Component {
+  state = {
+    history: [],
+  };
+
+  getHistoryUpdated = async () => {
+    await AsyncStorage.getItem('userID').then(
+      async userID => {
+        await console.log('id', userID); //Display key value
+        await this.props.dispatch(getHistory(userID));
+        await this.setState({
+          history: this.props.history.history.historyData.result,
+        });
+        await console.log('History ', this.state.history);
+      },
+      error => {
+        console.log(error); //Display error
+      },
+    );
+  };
+  componentDidMount = async () => {
+    this.getHistoryUpdated();
+  };
+
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.header}>
+            <Icon
+              onPress={() => this.props.navigation.navigate('Home')}
+              name="arrow-left"
+              color="white"
+              size={22}
+              style={{paddingLeft: 20}}
+            />
+            <Text style={{color: '#ffff', fontSize: 22, paddingLeft: 35}}>
+              History
+            </Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.header}>
-              <Icon
-                onPress={() => this.props.navigation.navigate('Home')}
-                name="arrow-left"
-                color="white"
-                size={22}
-                style={{paddingLeft: 20}}
-              />
-              <Text style={{color: '#ffff', fontSize: 22, paddingLeft: 35}}>
-                History
+          {this.state.history.map(item => (
+            <View style={{borderBottomWidth: 0.5}}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  paddingHorizontal: '2%',
+                  paddingVertical: '1%',
+                  fontSize: 17,
+                  color: '#9A97A9',
+                  backgroundColor: '#b2b2b2',
+                }}>
+                {item.transactionDate}
               </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.mainContainer}>
-            <View>
-              <View style={styles.mainText}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('DetailHistory', {
+                    historyID: item.historyID,
+                  })
+                }>
                 <Text
                   style={{
                     fontWeight: 'bold',
-                    paddingLeft: 13,
-                    top: 6,
-                    fontSize: 12,
-                    color: '#9A97A9',
+                    fontSize: 17,
+                    paddingLeft: '3%',
+                    marginTop: '1%',
                   }}>
-                  30 MAR 2020
+                  OWO
                 </Text>
-              </View>
-
-              <TouchableOpacity style={styles.cardContainer}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer2}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer3}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer4}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={{top: 40}}>
-              <View style={styles.mainText}>
-                <Text
+                <View
                   style={{
-                    fontWeight: 'bold',
-                    paddingLeft: 13,
-                    top: 6,
-                    fontSize: 12,
-                    color: '#9A97A9',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
                   }}>
-                  30 MAR 2020
-                </Text>
-              </View>
-              <TouchableOpacity style={styles.cardContainer}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
+                  <Text
+                    style={{
+                      color: 'grey',
+                      fontSize: 14,
+                      paddingLeft: '3%',
+                      marginTop: '1%',
+                    }}>
+                    {item.transactionMessage}
                   </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer2}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: 'green',
+                      paddingRight: '3%',
+                      marginTop: '1%',
+                    }}>
+                    Rp {item.transactionAmount}
                   </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer3}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardContainer4}>
-                <View style={styles.textTitle}>
-                  <Text style={{fontWeight: 'bold', fontSize: 15}}>Grab</Text>
-                </View>
-                <View style={styles.textDetail}>
-                  <Text style={{color: '#9A97A9', fontSize: 10}}>
-                    Pembayaran
-                  </Text>
-                  <Text style={{fontSize: 10, color: 'green'}}>-Rp2.000</Text>
                 </View>
               </TouchableOpacity>
             </View>
-          </View>
+          ))}
         </ScrollView>
       </View>
     );
   }
 }
+
+export default connect(mapStateToProps)(HistoryScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -172,57 +135,5 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     alignItems: 'center',
     top: 15,
-  },
-  mainContainer: {
-    backgroundColor: 'white',
-    paddingBottom: '100%',
-  },
-  mainText: {
-    backgroundColor: '#D5D9DF',
-    paddingBottom: 15,
-  },
-  cardContainer: {
-    //   marginHorizontal: 15
-    marginHorizontal: 15,
-    backgroundColor: 'white',
-    top: 10,
-  },
-  cardContainer2: {
-    //   marginHorizontal: 15
-    marginHorizontal: 15,
-    top: 20,
-    backgroundColor: 'white',
-  },
-  cardContainer3: {
-    //   marginHorizontal: 15
-    marginHorizontal: 15,
-    top: 30,
-    backgroundColor: 'white',
-  },
-  cardContainer4: {
-    //   marginHorizontal: 15
-    marginHorizontal: 15,
-    top: 45,
-    backgroundColor: 'white',
-  },
-
-  textTitle: {
-    // backgroundColor: 'magenta',
-    paddingBottom: 7,
-    // marginHorizontal: 15
-    // paddingLeft: 15
-  },
-  textDetail: {
-    // backgroundColor: 'aqua',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    alignItems: 'center',
-    // paddingLeft: 15,
-    // paddingRight: 15,
-    paddingBottom: 10,
-    borderBottomColor: '#9A97A9',
-    borderBottomWidth: 1,
-    // marginHorizontal: 15
   },
 });

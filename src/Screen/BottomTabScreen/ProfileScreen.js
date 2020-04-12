@@ -66,7 +66,12 @@ class ProfileScreen extends Component {
     this.props.navigation.navigate('Login');
   };
   handleEditProfile = () => {
-    this.props.navigation.navigate('EditProfile');
+    this.props.navigation.navigate('EditProfile', {
+      fullname: this.state.profile.fullname,
+      phoneNumber: this.state.profile.phoneNumber,
+      email: this.state.profile.email,
+      profileImage: this.state.profile.profileImage,
+    });
   };
   render() {
     return (
@@ -243,17 +248,19 @@ class ProfileScreen extends Component {
               <Icon name="chevron-right" size={15} style={style.chevron} />
             </View>
           </View>
-          <View style={style.version}>
-            <Text style={{opacity: 0.5, marginLeft: '3%'}}>
-              {'Version 3.8.1 (264)'}
-            </Text>
-            <Text style={style.pakeOWOaja}>#pakeOWOaja</Text>
+          <View style={{backgroundColor: '#F4F4F4'}}>
+            <View style={style.version}>
+              <Text style={{opacity: 0.5, marginLeft: '3%'}}>
+                {'Version 3.8.1 (264)'}
+              </Text>
+              <Text style={style.pakeOWOaja}>#pakeOWOaja</Text>
+            </View>
+            <TouchableOpacity
+              onPress={this.handleSignOut}
+              style={style.signOutContainer}>
+              <Text style={style.signOut}>Sign Out</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={this.handleSignOut}
-            style={style.signOutContainer}>
-            <Text style={style.signOut}>Sign Out</Text>
-          </TouchableOpacity>
         </ScrollView>
         <Modal
           visible={this.state.modalVisible}
@@ -263,18 +270,38 @@ class ProfileScreen extends Component {
             style={{
               alignSelf: 'center',
               backgroundColor: 'white',
-              justifyContent: 'space-around',
               marginTop: '40%',
               elevation: 3,
-              width: '80%',
-              height: '50%',
+              width: '90%',
+              height: '60%',
+              borderRadius: 20,
             }}>
+            <Text style={{fontWeight: 'bold', marginTop: 5, marginLeft: 5}}>
+              QR Code
+            </Text>
+            <Text style={{opacity: 0.5, marginLeft: 5}}>
+              Tunjukkan ini untuk transfer sesama OWO
+            </Text>
             <Image
-              style={{width: '80%', height: '50%', alignSelf: 'center'}}
+              style={{
+                width: '80%',
+                height: '70%',
+                alignSelf: 'center',
+                marginTop: 10,
+              }}
               source={{uri: this.state.profile.qrImage}}
             />
-            <TouchableOpacity onPress={this.handleCloseModal}>
-              <Text style={{alignSelf: 'center'}}>close</Text>
+            <TouchableOpacity
+              style={{padding: 10}}
+              onPress={this.handleCloseModal}>
+              <Text style={{alignSelf: 'center', marginTop: 15}}>
+                Sentuh tulisan ini untuk menutup
+              </Text>
+              <Icon
+                name="chevron-down"
+                size={25}
+                style={{alignSelf: 'center'}}
+              />
             </TouchableOpacity>
           </View>
         </Modal>
@@ -407,8 +434,10 @@ const style = StyleSheet.create({
     height: 50,
     backgroundColor: '#4D2A86',
     marginHorizontal: '5%',
-    marginVertical: '5%',
+    marginTop: '5%',
+    marginBottom: '10%',
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     borderRadius: 30,
   },

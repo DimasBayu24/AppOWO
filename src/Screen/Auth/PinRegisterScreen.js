@@ -18,9 +18,6 @@ import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 import {register} from '../../Redux/Actions/Auth';
 
-let screenWidth = Dimensions.get('window').width;
-let screenHeight = Dimensions.get('window').height;
-
 const mapStateToProps = auth => {
   return {
     auth,

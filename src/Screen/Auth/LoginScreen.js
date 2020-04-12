@@ -109,8 +109,7 @@ class LoginScreen extends Component {
             color={'#11AFB8'}
             style={styles.iconText}
           />
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity>
             <Text style={styles.textFooter}>Butuh bantuan?</Text>
           </TouchableOpacity>
         </View>
