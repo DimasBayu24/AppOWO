@@ -22,14 +22,14 @@ const mapStateToProps = postTransfer => {
   };
 };
 
-class TransferOwo extends Component {
-  // phoneNo = this.props.navigation.getParam('phoneNumber', '');
+class TransferWithQR extends Component {
+  phoneNo = this.props.navigation.getParam('phoneNumber', '');
 
   state = {
     userData: [],
     receiverData: [],
     transactionAmount: 0,
-    receiverPhoneNumber: '',
+    receiverPhoneNumber: this.phoneNo,
     transactionMessage: '',
   };
 
@@ -136,20 +136,19 @@ class TransferOwo extends Component {
                 size={25}
                 style={styles.iconBack}
               />
-              <Text style={styles.textNavbar}>KE SESAMA OWO</Text>
+              <Text style={styles.textNavbar}>KE SESAMA OWO QR</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.containerMain}>
             <View style={styles.containerTextInputUpper}>
               <TextInput
+                value={this.phoneNo}
+                editable={false}
                 placeholder="Masukan nama atau nomor ponsel"
                 placeholderTextColor="#9A97A9"
                 keyboardType="numeric"
                 style={styles.textInputUpper}
-                onChangeText={value => {
-                  this.setState({receiverPhoneNumber: value});
-                }}
               />
               <Icon
                 name="address-book"
@@ -194,7 +193,6 @@ class TransferOwo extends Component {
               <TextInput
                 placeholder="Pesan(opsional)"
                 placeholderTextColor="#9A97A9"
-                keyboardType="numeric"
                 maxLength={25}
                 style={styles.textInputUpper}
                 onChangeText={value => {
@@ -217,7 +215,7 @@ class TransferOwo extends Component {
   }
 }
 
-export default connect(mapStateToProps)(TransferOwo);
+export default connect(mapStateToProps)(TransferWithQR);
 
 const styles = StyleSheet.create({
   container: {

@@ -17,7 +17,8 @@ import ScanScreen from './src/Screen/BottomTabScreen/ScanScreen';
 import EditProfileScreen from './src/Component/EditProfileScreen';
 import TopUpScreen from './src/Screen/TransactionScreen/TopupScreen';
 import TransferScreen from './src/Screen/TransactionScreen/TransferScreen';
-import TransferOWO from './src/Component/Transfer';
+import TransferOwo from './src/Component/Transfer';
+import TransferWithQR from './src/Component/TransferWithQR';
 import HistoryScreen from './src/Screen/TransactionScreen/HistoryScreen';
 import FavoriteScreen from './src/Screen/TransactionScreen/FavoriteScreen';
 import DetailHistoryScreen from './src/Screen/TransactionScreen/DetailHistoryScreen';
@@ -36,6 +37,18 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: 'Login',
+    headerMode: 'none',
+  },
+);
+
+const ScanStack = createStackNavigator(
+  {
+    Scan: ScanScreen,
+    Trans: {screen: TransferOwo},
+    TransQR: {screen: TransferWithQR},
+  },
+  {
+    initialRouteName: 'Scan',
     headerMode: 'none',
   },
 );
@@ -94,7 +107,7 @@ const TransactionStack = createStackNavigator(
     TopUp: {screen: TopUpScreen},
     Transfer: {screen: TransferStack},
     History: {screen: HistoryScreen},
-    Trans: {screen: TransferOWO},
+
     DetailHistory: {screen: DetailHistoryScreen},
   },
   {
@@ -117,7 +130,7 @@ const AppTabNavigator = createBottomTabNavigator(
       },
     },
     Scan: {
-      screen: ScanScreen,
+      screen: ScanStack,
       navigationOptions: {
         tabBarIcon: ({tintColor}) => (
           <Icon
