@@ -1,4 +1,4 @@
-package com.appowo;
+package com.owo;
 
 import android.app.Application;
 import android.content.Context;
