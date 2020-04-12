@@ -28,14 +28,7 @@ export default class ScanScreen extends Component {
         onRead={this.onSuccess}
         // flashMode={Camera.Constants.FlashMode.torch}
         topContent={
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              width: '100%',
-              marginBottom: 40,
-            }}>
+          <View style={styles.view1}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Home')}>
               <IconEntypo name="cross" size={25} style={{marginLeft: 20}} />
@@ -49,38 +42,12 @@ export default class ScanScreen extends Component {
             <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>
               Cara bayar lainnya
             </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                marginTop: 5,
-                marginLeft: 30,
-              }}>
-              <TouchableOpacity
-                style={{
-                  padding: 5,
-                  backgroundColor: 'white',
-                  elevation: 2,
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginHorizontal: 10,
-                }}>
+            <View style={styles.view2}>
+              <TouchableOpacity style={styles.view3}>
                 <Icon name="phone" size={25} />
                 <Text style={{marginLeft: 15}}>Nomor HP</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  padding: 5,
-                  backgroundColor: 'white',
-                  elevation: 2,
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginHorizontal: 10,
-                }}>
+              <TouchableOpacity style={styles.view4}>
                 <Icon name="barcode" size={25} />
                 <Text style={{marginLeft: 15}}>Barcode</Text>
               </TouchableOpacity>
@@ -109,6 +76,39 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 16,
+  },
+  view1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 40,
+  },
+  view2: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 5,
+    marginLeft: 30,
+  },
+  view3: {
+    padding: 5,
+    backgroundColor: 'white',
+    elevation: 2,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  view4: {
+    padding: 5,
+    backgroundColor: 'white',
+    elevation: 2,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
 });
 

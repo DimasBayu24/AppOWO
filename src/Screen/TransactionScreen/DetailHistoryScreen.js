@@ -137,14 +137,7 @@ class DetailHistoryScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.containerBio}>
-            <View style={styles.containerTextFrom}>
-              {/* {this.state.userData[0].result.userID ===
-              this.state.loggedInUserID ? (
-                <Text style={styles.textFrom}>Ke</Text>
-              ) : (
-                <Text style={styles.textFrom}>Dari</Text>
-              )} */}
-            </View>
+            <View style={styles.containerTextFrom} />
             <View style={styles.containerUser}>
               <Icon
                 name="user-circle"

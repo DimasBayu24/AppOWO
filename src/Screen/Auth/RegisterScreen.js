@@ -17,18 +17,7 @@ class RegisterScreen extends Component {
     email: '',
   };
 
-  // registerId = () => {
-  //   const {fullname, phoneNumber, email} = this.state;
-  //   const user = {
-  //     fullname,
-  //     phoneNumber,
-  //     email,
-  //   };
-  //   this.props.dispatch(register(user));
-  // };
-
   buttonRegister = () => {
-    // this.registerId();
     this.props.navigation.navigate('Pin', {
       fullname: this.state.fullname,
       phoneNumber: this.state.phoneNumber,

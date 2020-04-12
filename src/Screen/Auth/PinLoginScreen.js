@@ -61,15 +61,7 @@ class PinLoginScreen extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.textTitle}>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontWeight: 'bold',
-              fontSize: 15,
-              color: '#53338C',
-            }}>
-            Masukkan Security Code Anda
-          </Text>
+          <Text style={styles.textInputCode}>Masukkan Security Code Anda</Text>
         </View>
         <View style={styles.textDetail}>
           <Text style={{textAlign: 'center', fontSize: 12}}>
@@ -140,6 +132,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: '5%',
     backgroundColor: '#11AFB8',
+  },
+  textInputCode: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#53338C',
   },
 
   borderStyleBase: {

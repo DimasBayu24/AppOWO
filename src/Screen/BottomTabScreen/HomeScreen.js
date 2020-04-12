@@ -72,19 +72,11 @@ class HomeScreen extends Component {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={style.scrollStyle}>
-            {/* <ImageBackGround
-            source={require('../../../assets/backgroundHome.png')}> */}
             <Text
               style={{marginTop: '3%', marginHorizontal: 10, color: 'white'}}>
               OWO Cash
             </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: '3%',
-                marginHorizontal: 10,
-                color: 'white',
-              }}>
+            <View style={style.View1}>
               <Text style={{color: 'white'}}>Rp</Text>
               <Text style={{fontSize: 30, color: 'white'}}>
                 {this.state.userData}
@@ -94,23 +86,8 @@ class HomeScreen extends Component {
               style={{marginTop: '3%', marginHorizontal: 10, color: 'white'}}>
               OVO Points <Text style={{color: 'orange'}}>483</Text>
             </Text>
-            <View
-              style={{
-                width: '88%',
-                backgroundColor: 'white',
-                height: 90,
-                alignSelf: 'center',
-                justifyContent: 'center',
-                borderRadius: 10,
-                marginTop: '5%',
-                elevation: 2,
-              }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
+            <View style={style.view2}>
+              <View style={style.view3}>
                 <TouchableOpacity
                   onPress={() =>
                     this.props.navigation.navigate('TopUp', {
@@ -136,98 +113,36 @@ class HomeScreen extends Component {
               </View>
             </View>
             {/* </ImageBackGround> */}
-            <View
-              style={{
-                flex: 1,
-                width: '100%',
-                height: 260,
-                backgroundColor: 'white',
-                alignSelf: 'center',
-                marginTop: '5%',
-                borderRadius: 5,
-                alignItems: 'center',
-                justifyContent: 'center',
-                elevation: 2,
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-              }}>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+            <View style={style.view4}>
+              <View style={style.view5}>
                 <IconF name="cloud-lightning" size={30} color={'orange'} />
                 <Text>PLN</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view6}>
                 <IconS name="screen-smartphone" size={30} />
                 <Text>Pulsa</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view7}>
                 <IconS name="globe" size={30} color={'blue'} />
                 <Text>Paket Data</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view8}>
                 <IconF name="smartphone" size={30} />
                 <Text>Pasca Bayar</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view9}>
                 <IconM name="shield-plus" size={30} color={'green'} />
                 <Text>BPJS</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view10}>
                 <Icon5 name="tv" size={30} />
                 <Text>TV Kabel</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view11}>
                 <Icon name="tv" size={30} />
                 <Text>Streaming</Text>
               </View>
-              <View
-                style={{
-                  width: '25%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={style.view12}>
                 <IconM name="clover" size={30} color={'purple'} />
                 <Text>Lainnya</Text>
               </View>
@@ -236,140 +151,59 @@ class HomeScreen extends Component {
               style={{
                 backgroundColor: 'white',
               }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 10,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    marginHorizontal: 10,
-                  }}>
-                  Info dan Promo Spesial
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    color: '#11AFB8',
-                    marginHorizontal: 10,
-                  }}>
-                  Lihat Semua
-                </Text>
+              <View style={style.view13}>
+                <Text style={style.view14}>Info dan Promo Spesial</Text>
+                <Text style={style.view15}>Lihat Semua</Text>
               </View>
               <ScrollView
                 style={{width: '100%', marginTop: '4%'}}
                 horizontal={true}>
                 <Image
-                  style={{
-                    width: 330,
-                    height: 130,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                  }}
+                  style={style.view16}
                   resizeMode="stretch"
                   source={require('../../../assets/slider1.png')}
                 />
 
                 <Image
-                  style={{
-                    width: 330,
-                    height: 130,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                  }}
+                  style={style.view17}
                   resizeMode="stretch"
                   source={require('../../../assets/slider2.png')}
                 />
 
                 <Image
-                  style={{
-                    width: 330,
-                    height: 130,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                  }}
+                  style={style.view18}
                   resizeMode="stretch"
                   source={require('../../../assets/slider3.png')}
                 />
 
                 <Image
-                  style={{
-                    width: 330,
-                    height: 130,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                  }}
+                  style={style.view19}
                   resizeMode="stretch"
                   source={require('../../../assets/slider4.png')}
                 />
               </ScrollView>
             </View>
-            <View
-              style={{
-                width: '100%',
-                height: 300,
-                backgroundColor: 'white',
-                marginTop: '5%',
-                elevation: 1,
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  marginTop: '5%',
-                  marginHorizontal: 10,
-                }}>
-                Yang Menarik di OWO
-              </Text>
+            <View style={style.view20}>
+              <Text style={style.view21}>Yang Menarik di OWO</Text>
               <Text
                 style={{opacity: 0.5, marginTop: '2%', marginHorizontal: 10}}>
                 Jangan ngaku update kalau belum cobain fitur ini
               </Text>
-              <View
-                style={{
-                  width: 150,
-                  height: 225,
-                  backgroundColor: 'white',
-                  borderRadius: 10,
-                  marginLeft: 10,
-                  elevation: 2,
-                  marginTop: '5%',
-                }}>
+              <View style={style.view22}>
                 <Image
-                  style={{
-                    width: 150,
-                    height: 100,
-                    borderTopLeftRadius: 10,
-                    borderTopLeftRadius: 10,
-                  }}
+                  style={style.view23}
                   resizeMode="stretch"
                   source={require('../../../assets/article1.png')}
                 />
                 <Text style={{fontWeight: 'bold', marginLeft: 5}}>
                   Pusat Bantuan
                 </Text>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    opacity: 0.5,
-                    marginTop: 10,
-                    marginLeft: 5,
-                  }}>
+                <Text style={style.view24}>
                   {
                     'Punya kendala atau \npertanyaan terkait OWO?\nKamu bisa kirim di sini'
                   }
                 </Text>
-                <Text
-                  style={{
-                    color: '#8FD6D7',
-                    alignSelf: 'center',
-                    marginTop: 15,
-                  }}>
-                  Lihat Bantuan
-                </Text>
+                <Text style={style.view25}>Lihat Bantuan</Text>
               </View>
             </View>
           </ScrollView>
@@ -404,5 +238,154 @@ const style = StyleSheet.create({
   bell: {
     marginRight: '5%',
     color: 'white',
+  },
+  View1: {
+    flexDirection: 'row',
+    marginTop: '3%',
+    marginHorizontal: 10,
+    color: 'white',
+  },
+  view2: {
+    flexDirection: 'row',
+    marginTop: '3%',
+    marginHorizontal: 10,
+    color: 'white',
+  },
+  view3: {
+    flexDirection: 'row',
+    marginTop: '3%',
+    marginHorizontal: 10,
+    color: 'white',
+  },
+  view4: {
+    flexDirection: 'row',
+    marginTop: '3%',
+    marginHorizontal: 10,
+    color: 'white',
+  },
+  view5: {
+    flexDirection: 'row',
+    marginTop: '3%',
+    marginHorizontal: 10,
+    color: 'white',
+  },
+  view6: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view7: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view8: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view9: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view10: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view11: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view12: {
+    width: '25%',
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view13: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  view14: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+  },
+  view15: {
+    fontSize: 15,
+    color: '#11AFB8',
+    marginHorizontal: 10,
+  },
+  view16: {
+    width: 330,
+    height: 130,
+    borderRadius: 15,
+    marginLeft: 10,
+  },
+  view17: {
+    width: 330,
+    height: 130,
+    borderRadius: 15,
+    marginLeft: 10,
+  },
+  view18: {
+    width: 330,
+    height: 130,
+    borderRadius: 15,
+    marginLeft: 10,
+  },
+  view19: {
+    width: 330,
+    height: 130,
+    borderRadius: 15,
+    marginLeft: 10,
+  },
+  view20: {
+    width: '100%',
+    height: 300,
+    backgroundColor: 'white',
+    marginTop: '5%',
+    elevation: 1,
+  },
+  view21: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: '5%',
+    marginHorizontal: 10,
+  },
+  view22: {
+    width: 150,
+    height: 225,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginLeft: 10,
+    elevation: 2,
+    marginTop: '5%',
+  },
+  view23: {
+    width: 150,
+    height: 100,
+    borderTopLeftRadius: 10,
+  },
+  view24: {
+    fontSize: 12,
+    opacity: 0.5,
+    marginTop: 10,
+    marginLeft: 5,
+  },
+  view25: {
+    color: '#8FD6D7',
+    alignSelf: 'center',
+    marginTop: 15,
   },
 });

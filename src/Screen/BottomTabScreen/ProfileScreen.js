@@ -84,18 +84,9 @@ class ProfileScreen extends Component {
           automaticallyAdjustContentInsets={true}
           style={{flex: 1, height: '100%'}}>
           <View style={style.userInfo}>
-            <View
-              style={{
-                width: 66,
-                height: 66,
-                borderRadius: 33,
-              }}>
+            <View style={style.view1}>
               <Image
-                style={{
-                  width: 66,
-                  height: 66,
-                  borderRadius: 33,
-                }}
+                style={style.view2}
                 source={{uri: this.state.profile.profileImage}}
               />
             </View>
@@ -118,16 +109,7 @@ class ProfileScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={style.OwoId}>
-            <Text
-              style={{
-                fontSize: 18,
-                padding: '2%',
-                marginLeft: 20,
-                fontWeight: 'bold',
-                marginTop: 10,
-              }}>
-              OWO ID
-            </Text>
+            <Text style={style.view3}>OWO ID</Text>
             <View style={style.boxQRBar}>
               <TouchableOpacity
                 onPress={() => {
@@ -266,16 +248,7 @@ class ProfileScreen extends Component {
           visible={this.state.modalVisible}
           animationType="slide"
           transparent={true}>
-          <View
-            style={{
-              alignSelf: 'center',
-              backgroundColor: 'white',
-              marginTop: '40%',
-              elevation: 3,
-              width: '90%',
-              height: '60%',
-              borderRadius: 20,
-            }}>
+          <View style={style.view4}>
             <Text style={{fontWeight: 'bold', marginTop: 5, marginLeft: 5}}>
               QR Code
             </Text>
@@ -283,12 +256,7 @@ class ProfileScreen extends Component {
               Tunjukkan ini untuk transfer sesama OWO
             </Text>
             <Image
-              style={{
-                width: '80%',
-                height: '70%',
-                alignSelf: 'center',
-                marginTop: 10,
-              }}
+              style={style.view5}
               source={{uri: this.state.profile.qrImage}}
             />
             <TouchableOpacity
@@ -451,5 +419,37 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: '5%',
     justifyContent: 'space-between',
+  },
+  view1: {
+    width: 66,
+    height: 66,
+    borderRadius: 33,
+  },
+  view2: {
+    width: 66,
+    height: 66,
+    borderRadius: 33,
+  },
+  view3: {
+    fontSize: 18,
+    padding: '2%',
+    marginLeft: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  view4: {
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    marginTop: '40%',
+    elevation: 3,
+    width: '90%',
+    height: '60%',
+    borderRadius: 20,
+  },
+  view5: {
+    width: '80%',
+    height: '70%',
+    alignSelf: 'center',
+    marginTop: 10,
   },
 });
