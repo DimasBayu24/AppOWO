@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon5 from 'react-native-vector-icons/FontAwesome5';
@@ -62,9 +63,24 @@ class ProfileScreen extends Component {
   };
 
   handleSignOut = () => {
-    AsyncStorage.removeItem('TOKEN');
-    this.props.navigation.navigate('Login');
+    setTimeout(async () => {
+      await this.props.navigation.navigate('Login');
+    }, 1000);
+    setTimeout(async () => {
+      await AsyncStorage.removeItem('TOKEN')
+        .then(() => {
+          ToastAndroid.showWithGravity(
+            'You have signed out',
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM,
+          );
+        })
+        .catch(error => {
+          alert('Something went wrong');
+        });
+    }, 2000);
   };
+
   handleEditProfile = () => {
     this.props.navigation.navigate('EditProfile', {
       fullname: this.state.profile.fullname,

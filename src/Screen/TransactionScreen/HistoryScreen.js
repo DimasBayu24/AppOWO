@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
@@ -44,6 +45,12 @@ class HistoryScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="#4D2A86"
+          translucent={true}
+        />
         <View style={styles.headerContainer}>
           <TouchableOpacity style={styles.header}>
             <Icon
@@ -93,13 +100,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    backgroundColor: '#53338C',
+    backgroundColor: '#4D2A86',
     paddingBottom: 35,
   },
   header: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center',
+    paddingTop: 20,
     top: 15,
   },
   view1: {

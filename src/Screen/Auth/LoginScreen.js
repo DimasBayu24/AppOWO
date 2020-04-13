@@ -127,15 +127,17 @@ const styles = StyleSheet.create({
     padding: '8%',
   },
   imageLogoContainer: {
+    // backgroundColor: 'yellow',
     width: '100%',
-    height: '30%',
+    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: '12%',
   },
   mainLogo: {
-    width: '60%',
-    height: '60%',
+    // resizeMode: 'cover',
+    width: '90%',
+    height: '80%',
     alignSelf: 'center',
   },
   loginFormContainer: {

@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'AppOwO' do
-  # Pods for AppOwO
+target 'OWO' do
+  # Pods for OWO
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -83,7 +83,7 @@ target 'AppOwO' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
-  target 'AppOwOTests' do
+  target 'OWOTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -100,10 +100,10 @@ target 'AppOwO' do
   end
 end
 
-target 'AppOwO-tvOS' do
-  # Pods for AppOwO-tvOS
+target 'OWO-tvOS' do
+  # Pods for OWO-tvOS
 
-  target 'AppOwO-tvOSTests' do
+  target 'OWO-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

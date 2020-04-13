@@ -31,17 +31,24 @@ class RegisterScreen extends Component {
       <View>
         <View style={style.header}>
           <TouchableOpacity>
-            <Icon style={style.backButton} name="arrow-left" />
+            <Icon
+              onPress={() => {
+                this.props.navigation.navigate('Login');
+              }}
+              style={style.backButton}
+              name="arrow-left"
+            />
           </TouchableOpacity>
           <Text style={style.headerText}>JOIN OWO</Text>
         </View>
-        <ScrollView style={style.form}>
+        <ScrollView style={style.form} indicatorStyle={false}>
           <Text style={{fontSize: 16}}>
-            Terima kasih telah bergabung! Kami {'akan\nmengirimkan'}
+            Terima kasih telah bergabung! Kami tentu{' '}
+            <Text style={{fontWeight: 'bold'}}>belum bisa</Text> mengirimkan
             <Text style={{fontWeight: 'bold'}}> kode</Text> melalui
             <Text style={{fontWeight: 'bold'}}> SMS</Text> dan
-            <Text style={{fontWeight: 'bold'}}> email</Text>
-            {'\nuntuk'} verifikasi proses registrasi{' '}
+            <Text style={{fontWeight: 'bold'}}> email</Text> untuk verifikasi
+            proses registrasi. Namun anda tetap bisa untuk mendaftar.
           </Text>
           <Text style={style.textForm}>Nama Lengkap</Text>
           <TextInput
@@ -61,11 +68,11 @@ class RegisterScreen extends Component {
             onChangeText={email => this.setState({email})}
             style={style.inputForm}
           />
-          <Text style={style.textForm}>
+          {/* <Text style={style.textForm}>
             {'Kode Promo/Referensi:(opsional)'}
-          </Text>
-          <TextInput style={style.inputForm} />
-          <View style={style.agreementText}>
+          </Text> */}
+          {/* <TextInput style={style.inputForm} /> */}
+          {/* <View style={style.agreementText}>
             <CheckBox value={false} disabled={false} />
             <Text style={{fontSize: 14}}>
               Saya setuju dengan
@@ -75,7 +82,7 @@ class RegisterScreen extends Component {
               <Text>dan</Text>
               <Text style={style.agreementTextPart}> Kebijakan Privasi</Text>
             </Text>
-          </View>
+          </View> */}
           <TouchableOpacity
             style={style.nextButton}
             onPress={this.buttonRegister}>

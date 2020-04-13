@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
-import {ImageBackground, StyleSheet, ActivityIndicator} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet} from 'react-native';
 
 export default class SplashScreen extends Component {
   componentDidMount() {
-    this.props.navigation.navigate('Login');
+    setTimeout(async () => {
+      this.props.navigation.navigate('Login');
+    }, 3000);
   }
   render() {
     return (
       <ImageBackground
         source={require('../../assets/Splash_Screen.png')}
         style={style.container}>
-        <ActivityIndicator size="large" />
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="#4D2A86"
+          translucent={true}
+        />
       </ImageBackground>
     );
   }

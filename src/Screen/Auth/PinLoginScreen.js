@@ -105,14 +105,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerTopNavbar: {
-    backgroundColor: '#53338C',
-    paddingBottom: '10%',
+    backgroundColor: '#4D2A86',
+
+    paddingBottom: '17%',
 
     alignContent: 'center',
   },
   topNavbar: {
     flexDirection: 'row',
-    top: '5%',
+    top: '12%',
   },
   textTitle: {
     paddingBottom: '2%',
