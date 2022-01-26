@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 import {getUser, postTransfer, getPhone} from '../Redux/Actions/Transfer';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const mapStateToProps = postTransfer => {
+const mapStateToProps = (postTransfer) => {
   return {
     postTransfer,
   };
@@ -39,12 +39,12 @@ class TransferOwo extends Component {
 
   userSender = async () => {
     await AsyncStorage.getItem('userID').then(
-      async userID => {
+      async (userID) => {
         await console.log('id sender', userID); //Display key value
         await this.props.dispatch(getUser(userID));
         await this.setState({
-          userData: this.props.postTransfer.postTransfer.postTransferData
-            .result[0],
+          userData:
+            this.props.postTransfer.postTransfer.postTransferData.result[0],
         });
         await console.log(
           'my balance ',
@@ -52,7 +52,7 @@ class TransferOwo extends Component {
             .balance,
         );
       },
-      error => {
+      (error) => {
         console.log(error); //Display error
       },
     );
@@ -62,8 +62,8 @@ class TransferOwo extends Component {
     const {receiverPhoneNumber} = await this.state;
     await this.props.dispatch(getPhone(receiverPhoneNumber));
     await this.setState({
-      receiverData: this.props.postTransfer.postTransfer.postTransferData
-        .result[0],
+      receiverData:
+        this.props.postTransfer.postTransfer.postTransferData.result[0],
     });
     await console.log(
       'Phone Number ',
@@ -73,12 +73,9 @@ class TransferOwo extends Component {
 
   transferBalance = async () => {
     await AsyncStorage.getItem('userID').then(
-      async userID => {
-        const {
-          transactionAmount,
-          receiverPhoneNumber,
-          transactionMessage,
-        } = this.state;
+      async (userID) => {
+        const {transactionAmount, receiverPhoneNumber, transactionMessage} =
+          this.state;
         const transferData = {
           senderID: userID,
 
@@ -91,7 +88,7 @@ class TransferOwo extends Component {
         await console.log('id', userID); //Display key value
         await this.props.dispatch(postTransfer(transferData));
       },
-      error => {
+      (error) => {
         console.log(error); //Display error
       },
     );
@@ -104,11 +101,11 @@ class TransferOwo extends Component {
           .then(() => {
             this.props.navigation.navigate('Home');
           })
-          .catch(error => {
+          .catch((error) => {
             alert('Something went wrong');
           });
       })
-      .catch(error => {
+      .catch((error) => {
         alert('Phone number is not registered');
       });
   };
@@ -147,7 +144,7 @@ class TransferOwo extends Component {
                 placeholderTextColor="#9A97A9"
                 keyboardType="numeric"
                 style={styles.textInputUpper}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   this.setState({receiverPhoneNumber: value});
                 }}
               />
@@ -184,7 +181,7 @@ class TransferOwo extends Component {
                   placeholderTextColor="black"
                   keyboardType="numeric"
                   style={styles.textInputAmount}
-                  onChangeText={value => {
+                  onChangeText={(value) => {
                     this.setState({transactionAmount: value});
                   }}
                 />
@@ -197,7 +194,7 @@ class TransferOwo extends Component {
                 keyboardType="numeric"
                 maxLength={25}
                 style={styles.textInputUpper}
-                onChangeText={value => {
+                onChangeText={(value) => {
                   this.setState({transactionMessage: value});
                 }}
               />
@@ -207,7 +204,7 @@ class TransferOwo extends Component {
               <TouchableOpacity
                 onPress={this.transferHandler}
                 style={styles.buttonSubmit}>
-                <Text style={styles.textSubmit}>Lanjutkan</Text>
+                <Text style={styles.textSubmit}>Lanjutkan Saja</Text>
               </TouchableOpacity>
             </View>
           </View>
